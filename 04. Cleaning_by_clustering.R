@@ -103,6 +103,7 @@ dat.clustlog <- log10(dat.clust)
 subflow <- flowPeaks(dat.clustlog[,c(1:10)], tol = 0.25, h0 = 0.05, h = 2) 
 
 
+
 # Examine details if interested. 
 # 'weight' column indicates the proportion of the data belonging to that cluster
 summary(subflow)
