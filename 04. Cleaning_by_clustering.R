@@ -86,7 +86,7 @@ dat.clust <- subset(dat.clust, dat.clust$FWS.Range > 0.2)
 dat.clustlog <- log10(dat.clust)
 # =================== MSC ==================
 # ============== TODO @Nik @Kel ============
-# realise how they determine bad-good clusters (e.g high fluorescence on one channel and very low on others)
+# realize how they determine bad-good clusters (e.g high fluorescence on one channel and very low on others)
 # instead of performing clustering here, run the whole dataset through the random forest calculated in step 2 
 #           (so we have to load the whole dataset and not just the raw dataset subset from script 3
 # if that takes a lot of time, re-construct the random forest using the "most-important parameters", those close to the root node
