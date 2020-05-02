@@ -84,9 +84,24 @@ dat.clust <- subset(dat.clust, dat.clust$FWS.Range > 0.2)
 
 # Log-transform all variables
 dat.clustlog <- log10(dat.clust)
-
+# =================== MSC ==================
+# ============== TODO @Nik @Kel ============
+# realise how they determine bad-good clusters (e.g high fluorescence on one channel and very low on others)
+# instead of performing clustering here, run the whole dataset through the random forest calculated in step 2 
+#           (so we have to load the whole dataset and not just the raw dataset subset from script 3
+# if that takes a lot of time, re-construct the random forest using the "most-important parameters", those close to the root node
+# Compare with auto-encoder
+# save this "cleaned dataset"
+# after removing all those points, then perform clustering on a subset from the "cleaned" raw dataset 
+#            - so we have to run Script 3 after this step 
+# visualize the clusters and validate with training set (classify training set on clusters, measure accuracy)
+# investigate other clustering methods other than flowPeaks
+# ==========================================
+# ==========================================
 # Cluster using flowPeaks
-subflow <- flowPeaks(dat.clustlog[,c(1:10)], tol = 0.25, h0 = 0.05, h = 2)
+
+subflow <- flowPeaks(dat.clustlog[,c(1:10)], tol = 0.25, h0 = 0.05, h = 2) 
+
 
 # Examine details if interested. 
 # 'weight' column indicates the proportion of the data belonging to that cluster
