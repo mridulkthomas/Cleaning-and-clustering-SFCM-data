@@ -15,6 +15,7 @@
 # source("http://bioconductor.org/biocLite.R")
 # biocLite("flowPeaks")
 
+#kel-This script takes as input both live and non-live cells and puts labels on every sample.#
 
 ### Script 2. Identify variables that help to distinguish live cells from other particles
 #     (the top variables will then be used for clustering to remove junk particles)
