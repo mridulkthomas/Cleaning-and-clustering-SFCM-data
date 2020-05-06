@@ -56,5 +56,7 @@ culturedat$SWS.Sample.Length <- NULL
 rf <- randomForest(culturedat[,5:98], culturedat$microscopy.biovolume,
                        importance = TRUE, ntree = 1001)
 
+##kel-outcome of random forests=17 trees#
+
 saveRDS(rf, './Script 1. Training biovolume estimation/output/Trained_RF_Cytobuoy_biovolume_estimation.rds')
 varImpPlot(rf, type = 1)
