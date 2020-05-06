@@ -19,6 +19,12 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
   install.packages("BiocManager")
 BiocManager::install(version = "3.11")
 
+
+#kelly-The input data of this script is the lab culture that is *cleaned* from non-cell particles by visual differentiation. 
+#This is why it is smaller than the input of the next script. This script contains only the live cells, according to 
+# manual cleaning#
+
+
 ### Script 1. Training random forest to predict biovolume based on lab culture measurements
 # Code takes as input:
 #   1)  SFCM training dataset generated using lab cultures. Lab cultures were measured by 
