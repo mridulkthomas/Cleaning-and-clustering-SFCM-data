@@ -15,6 +15,9 @@
 # source("http://bioconductor.org/biocLite.R")
 # biocLite("flowPeaks")
 
+###kel-In this dataset there are the complete records of the field dataset, the samples were taken at 6 depths every 4 hours
+#for 71 days. So we have totally 6x71 = 426 SFCM measurements##
+
 
 ### Script 3. Create a subset with data from all raw files equally represented
 #     (this subset will then be used for clustering and then to remove junk particles)
