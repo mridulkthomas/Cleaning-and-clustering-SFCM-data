@@ -33,11 +33,13 @@
 #library(flowPeaks)
 library(data.table)
 library(randomForest)
-
+library(googledrive)
 #Set seed for repeatability
 set.seed(42)
 #set working directory
 setwd("/cloud/project")
+
+drive_find()
 
 #Define colour palette for clusters in 3D plots
 palette1 <- c('black','red','green3','blue','cyan','magenta','yellow','gray',
