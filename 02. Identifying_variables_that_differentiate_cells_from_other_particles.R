@@ -29,13 +29,12 @@
 set.seed(42)
 
 #set working directory
-setwd()
+#setwd()
 
 # Load required packages
 library(data.table)
 library(randomForest)
 library(corrplot)
-
 # Read in training dataset
 dat_init <- read.csv('./Script 2. Identifying important variables for data cleaning/input/Random_forests_data_cleaning_trainingdata_2016_10_30.csv')
 
@@ -77,6 +76,3 @@ varImpPlot(rf, type = 2)
 
 # Saving trained random forest
 saveRDS(rf, './Script 2. Identifying important variables for data cleaning/output/Trained_RF_lab_measurements_data_cleaning_variable_importance.rds')
-
-# Remove all stored variables
-rm(list = ls())
