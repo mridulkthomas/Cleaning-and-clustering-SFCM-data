@@ -39,7 +39,14 @@ set.seed(42)
 #set working directory
 setwd("/cloud/project")
 
-drive_find()
+#@Nik Retrieve 8GB Field Dataset from Google Drive 
+#(Accesss Rights & Google Authorization Required)
+
+#googledrive::drive_auth(use_oob = TRUE)
+file = googledrive::drive_get("Phytoplankton_Data/workable.zip")
+print(file)
+
+googledrive::drive_download(file)
 
 #Define colour palette for clusters in 3D plots
 palette1 <- c('black','red','green3','blue','cyan','magenta','yellow','gray',
@@ -48,15 +55,12 @@ palette(palette1)
 
 
 # Load the list of raw data files
-filenames <- list.files(path = './Script 3. Generating raw data subset/input/', 
+filenames <- list.files(path = './workable/', 
                         pattern = c('Allparameters_'), full.names = FALSE)
 
 clean_dat <- function(x){
   # Read in data file, exclude unhelpful columns unless needed
-  df <- fread(paste0('./Script 3. Generating raw data subset/input/', x), 
-              drop = c('V1','SWS.Sample.Length', 'SWS.Time.of.Arrival', 'Length.Max',
-                       'Length.Min','Length.Max.Corrected'))
-  
+  df <- fread(paste0('./workable/', x))
   # Remove columns that are believed to be inaccurate
   df$Length.Max <- df$Length.Min <- df$Length.Max.Corrected <- NULL
   
@@ -88,14 +92,16 @@ clean_dat <- function(x){
   # Log-transform all variables
   dflog <- log10(df)
   
-  
   # Write cleaned file to .csv
   # Cleaned files are written to same subfolder as original file
-  write.csv(df, paste0('./Script 4. Cleaning by clustering/output/', 
-                       substr(x, 1, nchar(x) - 4), '_alt_cleaned', '.csv'),
+  #close(paste0('./workable/',x))
+  write.csv(df, paste0('./Cleaned_Field/',x),
             row.names = FALSE)
-  
 }
 
+
+
+dir.create('./Cleaned_Field/',showWarnings = FALSE)
 # Run function on file list to clean sequentially.
 mapply(clean_dat, x = filenames)
+
