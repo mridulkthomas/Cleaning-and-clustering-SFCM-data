@@ -15,6 +15,15 @@ if (length(new.packages)) install.packages(new.packages)
 source("http://bioconductor.org/biocLite.R")
 biocLite("flowPeaks")
 
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+BiocManager::install(version = "3.11")
+
+
+#kelly-The input data of this script is the lab culture that is *cleaned* from non-cell particles by visual differentiation. 
+#This is why it is smaller than the input of the next script. This script contains only the live cells, according to 
+# manual cleaning#
+
 
 ### Script 1. Training random forest to predict biovolume based on lab culture measurements
 # Code takes as input:
@@ -31,7 +40,7 @@ setwd()
 library(randomForest)
 
 # Read in training dataset
-culturedat <- read.csv('./Script 1. Training biovolume estimation/input/Random_forests_cleaned_lab_culture_trainingdata_2016_11_07.csv')
+culturedat <- read.csv('/cloud/project/Script 1. Training biovolume estimation/input/Random_forests_cleaned_lab_culture_trainingdata_2016_11_07.csv')
 
 # Define new traits
 culturedat$Red1Red2.ratio <- culturedat$FL.Red.Range / culturedat$X2.FL.Red.Range
@@ -47,8 +56,7 @@ culturedat$SWS.Sample.Length <- NULL
 rf <- randomForest(culturedat[,5:98], culturedat$microscopy.biovolume,
                        importance = TRUE, ntree = 1001)
 
+##kel-outcome of random forests=17 trees#
+
 saveRDS(rf, './Script 1. Training biovolume estimation/output/Trained_RF_Cytobuoy_biovolume_estimation.rds')
 varImpPlot(rf, type = 1)
-
-# Remove all stored variables
-rm(list = ls())
